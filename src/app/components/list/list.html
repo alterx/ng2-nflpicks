@@ -1,0 +1,9 @@
+
+<p>Welcome {{ myName }},</p>
+<p>Pick a team: </p>
+<ul>
+	<li *ng-for="#name of names" [router-link]="['/Team', {teamId: name}]">
+	{{ name }}
+	</li>
+</ul>
+<p *ng-if="names.length > 3">Only {{ names.length }} teams left!</p>
