@@ -3,3 +3,4 @@ npm-debug.log
 typings/
 *.js
 *.js.map
+bower_components/

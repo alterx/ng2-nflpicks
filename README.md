@@ -5,6 +5,7 @@ Attempt to create a simple weekly picks apps with TypeScript and Angular 2. I wi
 ## To install dependencies
 
 ` npm install `
+` bower install `
 ` tsd install `
 
 ## To run

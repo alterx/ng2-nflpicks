@@ -1,9 +1,24 @@
 
-<p>Welcome {{ myName }},</p>
-<p>Pick a team: </p>
-<ul>
-	<li *ng-for="#name of names" [router-link]="['/Team', {teamId: name}]">
-	{{ name }}
+<p>Welcome to Week {{ week }},</p>
+<p>Pick a the winners: </p>
+<ul *ng-if="days.length">
+	<li *ng-for="#day of days">	
+		{{ day.date }}
+		<ul>
+			<li *ng-for="#game of day.games">
+				<div class="card card-block">
+					<h4 class="card-title">{{ game.team1 }} at {{ game.team2 }}</h4>
+					<div class="btn-group" data-toggle="buttons">
+						<label class="btn btn-primary active">
+							<input type="radio" name="options" id="option1" autocomplete="off" checked> {{ game.team1 }}
+						</label>
+						<label class="btn btn-primary">
+							<input type="radio" name="options" id="option2" autocomplete="off"> {{ game.team2 }}
+						</label>
+					</div>
+					<a href="#" [router-link]="['/Game', {gameId: 'hi'}]" class="card-link">Details</a>
+				</div>		
+			</li>
+		</ul>
 	</li>
 </ul>
-<p *ng-if="names.length > 3">Only {{ names.length }} teams left!</p>

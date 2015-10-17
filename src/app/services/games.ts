@@ -11,23 +11,58 @@ const FUTURE_WEEKS_GAMES = BASE_URL + "/037a7096-ef4f-425a-af05-816f081d95f3/_qu
 @Injectable()
 export class Games {
 	
+	pastGames: Array<Object>;
+	
 	constructor(public http: Http) {
 	}	
 	
 	getPastGames(week: string) : any {
-		var games;
-		this.http.get(PAST_WEEKS_GAMES.replace('%WEEK_IDENTIFIER%', week))
-			.map(res => res.json())
-			.subscribe(
-				data => games = data,
-				err => () => console.log('error'),
-			() => console.log('Complete')
-		);
-		return games;
+		return this.http.get(PAST_WEEKS_GAMES.replace('%WEEK_IDENTIFIER%', week))
+			.map(function(res) {
+				var results = res.json().results || [],
+					week = [],
+					i = -1;
+				
+				results.map(function(game) {
+					if(game.team1) {
+						week[i].games.push(game);
+					} else {
+						week.push({ date: game.date, games: [] });
+						i++;
+					}
+				});
+				
+				return week;
+			}
+		)
 	}
 	
 	getFutureGames(week: string) : any {
-		return ['Seahawks', 'Patriots', 'Giants', '49ers', 'Vikings'];
+		return this.http.get(FUTURE_WEEKS_GAMES.replace('%WEEK_IDENTIFIER%', week))
+			.map(function(res) {
+				var results = res.json().results || [],
+					week = [],
+					i = -1;
+				
+				results.map(function(game) {
+					if(game.team1) {
+						week[i].games.push(game);
+					} else {
+						week.push({ date: game.date, games: [] });
+						i++;
+					}
+				});
+				
+				return week;
+			}
+		)
 	}
-
+	
+	getCurrentWeekNumber() : any {
+		
+	}
+	
+	weekIsInPast() : any {
+		return true;
+	}
 }
