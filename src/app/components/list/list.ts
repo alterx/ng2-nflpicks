@@ -1,6 +1,6 @@
 import {Component, View, bootstrap, NgFor, NgIf} from 'angular2/angular2';
 import {RouterLink} from 'angular2/router';
-import {TeamsService} from '../../services/teams';
+import {Games} from '../../services/games';
 
 @Component({
   selector: 'display'
@@ -15,8 +15,8 @@ export class List {
   myName: string;
   names: Array<string>;
   
-  constructor(teamsService: TeamsService) {
+  constructor(games: Games) {
     this.myName = "Carlos";
-    this.names = teamsService.getTeamNames();
+    this.names = games.getPastGames('');
   }
 }
