@@ -1,5 +1,6 @@
 import {Component, View} from 'angular2/angular2';
 import {RouteConfig, RouterOutlet} from 'angular2/router';
+import {Parse} from 'Parse';
 
 import {List} from '../list/list';
 import {Game} from '../game/game';
@@ -22,5 +23,7 @@ import {Game} from '../game/game';
 ])
 
 export class MyApp {
-  constructor() {}
+  constructor() {
+      console.log(Parse);
+  }
 }

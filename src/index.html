@@ -13,6 +13,16 @@
         packages: {'app': {defaultExtension: 'js'}}
       });
       System.import('app/bootstrap');
+      System.import('../node_modules/parse/dist/parse-latest.js').then(function (Parse) {
+        System.register("Parse", [], true, function(require, exports, module) {
+          var global = System.global,
+              __define = global.define;
+          global.define = undefined;
+          exports.Parse = Parse;
+          global.define = __define;
+          return module.exports;
+        });
+      });
     </script>
   </head>
   <body>
