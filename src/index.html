@@ -12,9 +12,10 @@
       System.config({
         packages: {'app': {defaultExtension: 'js'}}
       });
-      System.import('app/bootstrap');
+      System.import('app/bootstrap.js');
+      System.import('app/config/config.js');
       System.import('../node_modules/parse/dist/parse-latest.js').then(function (Parse) {
-        System.register("Parse", [], true, function(require, exports, module) {
+        System.register("parse", [], true, function(require, exports, module) {
           var global = System.global,
               __define = global.define;
           global.define = undefined;

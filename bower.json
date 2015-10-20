@@ -1,0 +1,19 @@
+{
+  "name": "ng2-nflpicks",
+  "version": "1",
+  "homepage": "https://github.com/alterx/ng2-nflpicks",
+  "authors": [
+    "Carlos Vega"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "boostrapv4.0": "https://github.com/twbs/bootstrap.git#v4.0.0-alpha"
+  }
+}
