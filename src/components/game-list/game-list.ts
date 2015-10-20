@@ -7,21 +7,26 @@ import {Games} from '../../services/games';
 })
 
 @View({
-  templateUrl: 'app/components/list/list.html' ,
+  templateUrl: 'src/components/game-list/game-list.html' ,
   directives: [NgFor, NgIf, RouterLink]
 })
 
-export class List {
+export class GameList {
   myName: string;
   days: Array<Object>;
   week: string;
+  games: Games;
   
   constructor(games: Games, params: RouteParams) {
     this.myName = "Carlos";
     this.days = [{}];
-    this.week = params.get('week') || 'REG1';
-    
-    games.getPastGames(this.week).subscribe(results => this.days = results);
-   
+    this.games = games;
+    this.week = params.get('weekId').replace(/\D/g,'') || '';
+
+    this.goToWeek(params.get('weekId'));
+  }
+  
+  goToWeek(week) {    
+      this.games.getGames(week).subscribe(results => this.days = results);
   }
 }

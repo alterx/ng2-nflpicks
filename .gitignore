@@ -4,4 +4,3 @@ typings/
 *.js
 *.js.map
 bower_components/
-config.ts

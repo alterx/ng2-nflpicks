@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title>Getting Started</title>
+    <base href="/">
+    <!-- Bootstrap core CSS -->
+    <link href="../../bower_components/boostrapv4.0/dist/css/bootstrap.css" rel="stylesheet">
+    
+    <script src="../node_modules/systemjs/dist/system.src.js"></script>
+    <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+    <script src="../node_modules/angular2/bundles/http.dev.js"></script>
+    <script src="../node_modules/angular2/bundles/router.dev.js"></script>
+    <script src="../node_modules/parse/dist/parse-latest.js"></script>
+    <script>
+      System.config({
+        packages: {'src': {defaultExtension: 'js'}}
+      });
+      System.import('src/bootstrap');
+    </script>
+  </head>
+  <body>
+    <my-app>loading...</my-app>
+  </body>
+</html>

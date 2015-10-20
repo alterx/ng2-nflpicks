@@ -1,6 +1,6 @@
 
 <p>Welcome to Week {{ week }},</p>
-<p>Pick a the winners: </p>
+<p>Pick the winners: </p>
 <ul *ng-if="days.length">
 	<li *ng-for="#day of days">	
 		{{ day.date }}
@@ -16,7 +16,6 @@
 							<input type="radio" name="options" id="option2" autocomplete="off"> {{ game.team2 }}
 						</label>
 					</div>
-					<a href="#" [router-link]="['/Game', {gameId: 'hi'}]" class="card-link">Details</a>
 				</div>		
 			</li>
 		</ul>

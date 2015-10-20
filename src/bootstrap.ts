@@ -6,4 +6,4 @@ import {HTTP_BINDINGS} from 'angular2/http';
 
 import {MyApp} from './components/base/app';
 
-bootstrap(MyApp, [ROUTER_BINDINGS,bind(APP_BASE_HREF).toValue(location.pathname), HTTP_BINDINGS, Games]);
+bootstrap(MyApp, [ROUTER_BINDINGS, HTTP_BINDINGS, Games]);

@@ -1,0 +1,7 @@
+
+<p>Regular Season</p>
+<ul>
+	<li *ng-for="#week of weeks" [router-link]="['/GameList', {weekId: 'REG' + week}]">
+		{{ week }}
+	</li>
+</ul>
