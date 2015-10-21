@@ -1,7 +1,7 @@
 export var config = {
   parse: {
-    APP_ID: '',
-    JS_KEY: ''
+    APP_ID: 'GNIWYPgooVCkob3SH1jyo5DEQfCCRU9bjS1eGWph',
+    JS_KEY: 't1uqe3KuKbcHWNOZg6SEmSiwVP2e4h2RXfxXkZXJ'
   },
   importio: {
     BASE_URL: 'https://api.import.io/store/data',

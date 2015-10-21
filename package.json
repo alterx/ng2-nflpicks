@@ -9,9 +9,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "angular2": "2.0.0-alpha.42",
+    "angular2": "2.0.0-alpha.44",
     "parse": "^1.6.7",
     "systemjs": "0.19.2"
   },

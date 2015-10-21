@@ -1,8 +1,11 @@
 <nav class="navbar navbar-inverse navbar-static-top">
-	<a class="navbar-brand" href="/">NG2 Nfl Picks</a>
+	<a class="navbar-brand" [router-link]="['/WeekList']" >NG2 Nfl Picks</a>
 	<ul class="nav nav-pills">
-	<li class="nav-item active">
-		<a class="nav-link" [router-link]="['/GameList', {weekId: 'REG' + currentWeek}]">Current Week</a>
-	</li>
+		<li class="nav-item active">
+			<a class="nav-link" [router-link]="['/GameList', {weekId: 'REG' + currentWeek}]">Current Week</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" (click)="logOut();">Log out</a>
+		</li>
 	</ul>
 </nav>

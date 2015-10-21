@@ -1,6 +1,5 @@
 import {Component, View} from 'angular2/angular2';
-import {RouteConfig, RouterOutlet} from 'angular2/router';
-import {Parse} from '../../../../node_modules/parse/dist/parse-latest.js';
+import {RouteConfig, RouterOutlet, Location} from 'angular2/router';
 import {config} from '../../config/config';
 import {GameList} from '../game-list/game-list';
 import {WeekList} from '../week-list/week-list';
@@ -23,13 +22,14 @@ import {Nav} from '../nav/nav';
 })
 
 @RouteConfig([
-    { path: '/', component: WeekList, as: 'WeekList'},
+    { path: '/home', component: WeekList, as: 'WeekList'},
     { path: '/login', component: Login, as: 'Login'},
     { path: '/week/:weekId', component: GameList, as: 'GameList'},
 ])
 
 export class MyApp {
-  constructor() {
+  constructor(location: Location) {
     Parse.initialize(config.parse.APP_ID, config.parse.JS_KEY);
+    console.log('hi');
   }
 }
