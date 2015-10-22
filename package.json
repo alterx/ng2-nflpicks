@@ -13,6 +13,7 @@
   "dependencies": {
     "angular2": "2.0.0-alpha.44",
     "parse": "^1.6.7",
+    "rx": "^4.0.6",
     "systemjs": "0.19.2"
   },
   "devDependencies": {

@@ -1,7 +1,8 @@
-import {Component, View, NgFor, NgIf} from 'angular2/angular2';
+import {Component, View, NgFor, NgIf, FORM_DIRECTIVES, NgClass} from 'angular2/angular2';
 import {RouterLink, RouteParams, CanActivate} from 'angular2/router';
 import {Games} from '../../services/games';
 import {Users} from '../../services/users';
+import {Week} from '../../models/week';
 
 var users = new Users();
 
@@ -11,7 +12,7 @@ var users = new Users();
 
 @View({
   templateUrl: 'src/components/game-list/game-list.html' ,
-  directives: [NgFor, NgIf, RouterLink]
+  directives: [NgFor, NgIf, FORM_DIRECTIVES, NgClass, RouterLink]
 })
 
 @CanActivate(() => users.isAuthenticated())
@@ -31,6 +32,17 @@ export class GameList {
   }
   
   goToWeek(week) {    
-      this.games.getGames(week).subscribe(results => this.days = results);
+      this.games.getGames(week).subscribe(result => this.days = result.days);
+  }
+  
+  checkWinner(game, team) {
+      game.winner = team;
+  }
+  
+  savePicks(form) {
+    if(form.valid) {
+      week = new Week({id: 'REG' + this.week, days: this.days});
+      this.games.saveUserPicks(week);
+    }
   }
 }

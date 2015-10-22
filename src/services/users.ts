@@ -1,4 +1,4 @@
-import {Injectable} from 'angular2/angular2';
+import {Injectable, Promise} from 'angular2/angular2';
 
 @Injectable()
 export class Users {

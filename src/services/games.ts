@@ -1,35 +1,62 @@
 import {Http} from 'angular2/http';
 import {Injectable} from 'angular2/angular2';
 import {config} from '../config/config';
+import {Game} from '../models/game';
+import {Day} from '../models/day';
+import {Week} from '../models/week';
+
+import * as Rx from '../../../node_modules/rx/dist/rx.all.js';
 
 const GAMES = config.importio.BASE_URL + "/18452fea-fbb0-4315-b902-7ff30aacbc39/_query?input/webpage/url=http%3A%2F%2Fwww.nfl.com%2Fschedules%2F2015%2F%WEEK_IDENTIFIER%&_user=" + config.importio.USER + "&_apikey=" + config.importio.API_KEY;
 const CURRENT_WEEK = config.importio.BASE_URL + "/17db7886-7167-4cf1-90b5-e3b2a196f1a6/_query?input/webpage/url=http%3A%2F%2Fwww.nfl.com%2Fschedules&_user=" + config.importio.USER + "&_apikey=" + config.importio.API_KEY;
+const COLLECTION_NAME = "WEEKLY_PICKS";
 
 @Injectable()
 export class Games {
 	
+	picks: Array;
+	
 	constructor(public http: Http) {
 	}	
-	
+	// Probably want to use fetch here, still wanted to test Rx observables
 	getGames(week: string) : any {
-		return this.http.get(GAMES.replace('%WEEK_IDENTIFIER%', week))
-			.map(function(res) {
-				var results = res.json().results || [],
-					week = [],
-					i = -1;
-				
-				results.map(function(game) {
-					if(game.team1) {
-						week[i].games.push(game);
-					} else {
-						week.push({ date: game.date, games: [] });
-						i++;
-					}
-				});
-				
-				return week;
-			}
-		);
+		return Rx.Observable.create(function(observer) {
+			this.getUserPicks(week).then(function(results){
+				if(results.length === 1) {
+					var returnObj = new Week(results[0].get(COLLECTION_NAME), results[0].id);
+					
+					observer.onNext(returnObj);
+					observer.onCompleted();
+				} else {
+					this.http.get(GAMES.replace('%WEEK_IDENTIFIER%', week))
+						.map(function(res) {
+							var results = res.json().results || [],
+								weekDays = [],
+								i = -1;
+							
+							results.map(function(gamep) {
+								var day, game;
+								
+								if(gamep.team1) {
+									game = new Game(gamep);
+									weekDays[i].games.push(game);
+								} else {
+									day = new Day(gamep.date, []);
+									weekDays.push(day);
+									i++;
+								}
+							});
+							
+							var returnObj = new Week({id: week, days: weekDays});
+							observer.onNext(returnObj);
+							observer.onCompleted();
+						}
+					).subscribe(function(result) {
+						
+					});
+				}
+			}.bind(this));
+		}.bind(this));	
 	}
 	
 	getCurrentWeekNumber() : any {
@@ -48,5 +75,36 @@ export class Games {
 				return result;
 			}
 		);
+	}
+	
+	saveUserPicks(week: Week) : any {
+		var user = Parse.User.current();
+    	var Collection = Parse.Object.extend(COLLECTION_NAME);
+		
+		var collection = new Collection();
+		
+		if(week.parseId && week.parseId !== '') {
+			collection.set("id", week.parseId);
+		}
+		collection.set(COLLECTION_NAME, week);
+		collection.set("weekId", week.id);
+		collection.set("user", user);
+
+		collection.save(null, {success: function(data) {
+			consoole.log(data);
+		}, error: function() {
+			console.log('error');
+		}});	
+	}
+	
+	private getUserPicks(weekId: string) {
+		var query = new Parse.Query(COLLECTION_NAME);
+		
+		if(weekId !== '' && weekId) {
+			query.equalTo('weekId', weekId);
+		}
+		query.equalTo('user', Parse.User.current());
+
+		return query.find();
 	}
 }
