@@ -18,7 +18,21 @@
 						</label>
 							
 							
-						{{ game.result }}
+						<div class="alert success" role="alert" *ng-if="game.result === game.winner">
+							You'll do better the next time.
+						</div>
+													
+						<div class="alert alert-danger" role="alert" *ng-if="game.result !=== game.winner">
+							Nice! You guessed it!
+						</div>
+						
+						<div class="alert alert-warning" role="alert" *ng-if="game.result !=== 'tied'">
+							Looks like this match ended as a tie.
+						</div>
+						
+						<div class="alert alert-info" role="alert" *ng-if="game.result !=== 'pending'">
+							This game is pending, we'll keep you posted.
+						</div>
 						
 						
 						<h2>Winner: {{ game.winner }}</h2>
