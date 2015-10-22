@@ -1,10 +1,10 @@
 <nav class="navbar navbar-inverse navbar-static-top">
 	<a class="navbar-brand" [router-link]="['/WeekList']" >NG2 Nfl Picks</a>
 	<ul class="nav nav-pills">
-		<li class="nav-item active">
+		<li *ng-if="loggedIn();" class="nav-item active">
 			<a class="nav-link" [router-link]="['/GameList', {weekId: 'REG' + currentWeek}]">Current Week</a>
 		</li>
-		<li class="nav-item">
+		<li *ng-if="loggedIn();" class="nav-item">
 			<a class="nav-link" (click)="logOut();">Log out</a>
 		</li>
 	</ul>

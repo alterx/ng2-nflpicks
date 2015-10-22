@@ -1,4 +1,4 @@
-import {Component, View} from 'angular2/angular2';
+import {Component, View, NgIf} from 'angular2/angular2';
 import {RouterLink, RouteParams, Router} from 'angular2/router';
 import {Games} from '../../services/games';
 import {Users} from '../../services/users';
@@ -6,10 +6,12 @@ import {Users} from '../../services/users';
 @Component({
   selector: 'nav-bar'
 })
+
 @View({
     templateUrl: 'src/components/nav/nav.html',
-    directives: [RouterLink]
+    directives: [RouterLink, NgIf]
 })
+
 export class Nav {
   currentWeek: string;
   users: Users;
@@ -25,5 +27,9 @@ export class Nav {
     this.users.logout().then(function() {
       this.router.navigate(['/Login']);
     }.bind(this));
+  }
+  
+  loggedIn() {
+    return this.users.isAuthenticated();
   }
 }
