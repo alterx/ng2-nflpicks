@@ -9,37 +9,23 @@
 				<li *ng-for="#game of day.games, #i = index">
 					<div class="card card-block">
 						<h1 class="card-title">{{ game.team1 }} at {{ game.team2 }}</h1>
-						
-						<label class="btn btn-primary" [ng-class]="{active: game.winner === game.team1}">
-							<input type="radio" name="options{{ j }}{{ i }}" id="option1" autocomplete="off" (click)="checkWinner(game, game.team1);" required> {{ game.team1 }}
-						</label>
-						<label class="btn btn-primary" [ng-class]="{active: game.winner === game.team2}">
-							<input type="radio" name="options{{ j }}{{ i }}" id="option2" autocomplete="off" (click)="checkWinner(game, game.team2);" required> {{ game.team2 }}
-						</label>
-							
-							
-						<div class="alert success" role="alert" *ng-if="game.result === game.winner">
-							You'll do better the next time.
-						</div>
-													
-						<div class="alert alert-danger" role="alert" *ng-if="game.result !=== game.winner">
-							Nice! You guessed it!
+						<div [hidden]="(day.date === 'Next Game') || game.result !== 'pending'">
+							<label class="btn btn-primary" [ng-class]="{active: game.winner === game.team1}">
+								<input type="radio" name="options{{ j }}{{ i }}" id="option1" value="{{ game.team1 }}" autocomplete="off" 
+									(click)="checkWinner(game, game.team1);" [checked]="game.winner === game.team1"> {{ game.team1 }}
+							</label>
+							<label class="btn btn-primary" [ng-class]="{active: game.winner === game.team2}">
+								<input type="radio" name="options{{ j }}{{ i }}" id="option2" value="{{ game.team2 }}" autocomplete="off" 
+									(click)="checkWinner(game, game.team2);" required [checked]="game.winner === game.team2"> {{ game.team2 }}
+							</label>
 						</div>
 						
-						<div class="alert alert-warning" role="alert" *ng-if="game.result !=== 'tied'">
-							Looks like this match ended as a tie.
-						</div>
-						
-						<div class="alert alert-info" role="alert" *ng-if="game.result !=== 'pending'">
-							This game is pending, we'll keep you posted.
-						</div>
-						
-						
-						<h2>Winner: {{ game.winner }}</h2>
+						<p *ng-if="day.date !== 'Next Game'">Winner: {{ game.result }}</p>
+						<p *ng-if="day.date !== 'Next Game'">You picked: {{ game.winner }}</p>
 					</div>		
 				</li>
 			</ul>
 		</li>
 	</ul>
-	<button type="submit">Submit Form</button>
+	<button type="submit">Submit Picks</button>
 </form>
