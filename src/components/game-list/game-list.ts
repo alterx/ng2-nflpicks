@@ -11,7 +11,8 @@ var users = new Users();
 })
 
 @View({
-  templateUrl: 'src/components/game-list/game-list.html' ,
+  templateUrl: 'src/components/game-list/game-list.html',
+  styleUrls: ['src/components/game-list/game-list.css'],
   directives: [NgFor, NgIf, FORM_DIRECTIVES, NgClass, RouterLink]
 })
 
@@ -41,7 +42,7 @@ export class GameList {
   
   savePicks(form) {
     if(form.valid) {
-      week = new Week({id: 'REG' + this.week, days: this.days});
+      var week = new Week({id: 'REG' + this.week, days: this.days});
       this.games.saveUserPicks(week);
     }
   }

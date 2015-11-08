@@ -1,0 +1,14 @@
+.center { 
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+
+.weekly-picks ul {
+	padding: 0;
+}
+
+.weekly-picks li {
+	width: auto;
+	list-style: none;
+}

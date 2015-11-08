@@ -5,9 +5,6 @@ import {Game} from '../models/game';
 import {Day} from '../models/day';
 import {Week} from '../models/week';
 
-import * as Rx from '../../../node_modules/rx/dist/rx.all.js';
-import * as Moment from '../../../node_modules/moment/moment.js';
-
 const GAMES = config.importio.BASE_URL + "/18452fea-fbb0-4315-b902-7ff30aacbc39/_query?input/webpage/url=http%3A%2F%2Fwww.nfl.com%2Fschedules%2F2015%2F%WEEK_IDENTIFIER%&_user=" + config.importio.USER + "&_apikey=" + config.importio.API_KEY;
 const CURRENT_WEEK = config.importio.BASE_URL + "/17db7886-7167-4cf1-90b5-e3b2a196f1a6/_query?input/webpage/url=http%3A%2F%2Fwww.nfl.com%2Fschedules&_user=" + config.importio.USER + "&_apikey=" + config.importio.API_KEY;
 const COLLECTION_NAME = "WEEKLY_PICKS";
@@ -15,7 +12,7 @@ const COLLECTION_NAME = "WEEKLY_PICKS";
 @Injectable()
 export class Games {
 	
-	picks: Array;
+	picks: Array<Object>;
 	
 	constructor(public http: Http) {
 	}	
@@ -91,7 +88,7 @@ export class Games {
 		collection.set("user", user);
 
 		collection.save(null, {success: function(data) {
-			consoole.log(data);
+			console.log(data);
 		}, error: function() {
 			console.log('error');
 		}});	
