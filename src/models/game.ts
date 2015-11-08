@@ -1,12 +1,10 @@
-import * as Moment from '../../../node_modules/moment/moment.js';
-
 export class Game {
     id: string;
     team1: string;
     team2: string;
     team1_score: number;
     team2_score: number;
-    date: Moment;
+    date: string;
     time: string;
     winner: string;
     result: string;
@@ -17,13 +15,14 @@ export class Game {
         this.team2 = externalGame.team2;
         this.team1_score = parseInt(externalGame.team1_score);
         this.team2_score = parseInt(externalGame.team2_score);
-        
-        var moment = new Moment(gameDate);
-        this.date = moment;
-        
-        this.date = externalGame.date;
         this.winner = externalGame.winner || '';
         this.calculateWinningTeam(externalGame);
+    }
+    
+    public isEnabled() {
+        var gameDate = moment(this.date).utc(),
+            current = moment().utc();
+            console.log(gameDate.diff(current));
     }
     
     private calculateWinningTeam(game) {

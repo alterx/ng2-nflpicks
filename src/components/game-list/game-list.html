@@ -1,31 +1,32 @@
 
-<p>Welcome to Week {{ week }},</p>
-<p>Pick the winners: </p>
-<form #f="form" (ng-submit)="savePicks(f);">
+<h1>Welcome to Week {{ week }},</h1>
+<form #f="form" (ng-submit)="savePicks(f);" class="col-md-offset-2 col-md-8 weekly-picks">
 	<ul *ng-if="days.length">
-		<li *ng-for="#day of days, #j = index">
-			{{ day.date }}
+		<li  *ng-for="#day of days, #j = index">
+			<h2 class="center">{{ day.date }}</h2>
 			<ul>
 				<li *ng-for="#game of day.games, #i = index">
 					<div class="card card-block">
-						<h1 class="card-title">{{ game.team1 }} at {{ game.team2 }}</h1>
-						<div [hidden]="(day.date === 'Next Game') || game.result !== 'pending'">
-							<label class="btn btn-primary" [ng-class]="{active: game.winner === game.team1}">
+						<h3 class="card-title center">{{ game.team1 }} at {{ game.team2 }}</h3>
+						<div class="center" [hidden]="(day.date === 'Next Game') || game.result !== 'pending'">
+							<label class="btn btn-secondary" [ng-class]="{active: game.winner === game.team1}">
 								<input type="radio" name="options{{ j }}{{ i }}" id="option1" value="{{ game.team1 }}" autocomplete="off" 
 									(click)="checkWinner(game, game.team1);" [checked]="game.winner === game.team1"> {{ game.team1 }}
 							</label>
-							<label class="btn btn-primary" [ng-class]="{active: game.winner === game.team2}">
+							<label class="btn btn-secondary" [ng-class]="{active: game.winner === game.team2}">
 								<input type="radio" name="options{{ j }}{{ i }}" id="option2" value="{{ game.team2 }}" autocomplete="off" 
 									(click)="checkWinner(game, game.team2);" required [checked]="game.winner === game.team2"> {{ game.team2 }}
 							</label>
 						</div>
 						
-						<p *ng-if="day.date !== 'Next Game'">Winner: {{ game.result }}</p>
-						<p *ng-if="day.date !== 'Next Game'">You picked: {{ game.winner }}</p>
+						<p class="center" *ng-if="day.date !== 'Next Game'">Winner: {{ game.result }}</p>
+						<p class="center" *ng-if="day.date !== 'Next Game'">You picked: {{ game.winner }}</p>
 					</div>		
 				</li>
 			</ul>
 		</li>
 	</ul>
-	<button type="submit">Submit Picks</button>
+	<div class="button-container center">
+		<button class="btn btn-primary" type="submit">Submit Picks</button>
+	</div>
 </form>
