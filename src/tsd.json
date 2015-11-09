@@ -16,10 +16,15 @@
     },
     "rx/rx-lite.d.ts": {
       "commit": "a461a243e2e09b213bc49d12650f80d81047576d"
-    }, 
+    },
     "angular2/router.d.ts": {
       "commit": "a461a243e2e09b213bc49d12650f80d81047576d"
+    },
+    "moment/moment-node.d.ts": {
+      "commit": "421d6610bdb09e1015b71f5991d7a68d079eca21"
+    },
+    "moment/moment.d.ts": {
+      "commit": "421d6610bdb09e1015b71f5991d7a68d079eca21"
     }
   }
 }
-
